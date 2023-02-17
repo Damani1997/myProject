@@ -1,0 +1,140 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "User API"
+basePath: "/users"
+paths:
+  /all:
+    get:
+      summary: "Get all users"
+      description: "Returns a list of all users' names"
+      responses:
+        200:
+          description: "List of users"
+        500:
+          description: "Server error"
+      tags:
+        - "users"
+  /signup:
+    post:
+      summary: "Add a new user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "user"
+          in: "body"
+          description: "User object"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              name:
+                type: "string"
+              password:
+                type: "string"
+              email:
+                type: "string"
+      responses:
+        200:
+          description: "User signed up successfully ( returns the record of user) /User is duplicate"
+        500:
+          description: "Server error"
+      tags:
+        - "users"
+  /login:
+    post:
+      summary: "Login user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "user"
+          in: "body"
+          description: "User object"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              email:
+                type: "string"
+              password:
+                type: "string"
+      responses:
+        200:
+          description: "Logged in successfully(returns jwt token for the user)/ User not found/ Invalid password"
+        500:
+          description: "Server error"
+      tags:
+        - "users"
+  /bulkupload:
+    post:
+      summary: "Bulk user upload"
+      description: "Bulk uploads users from a CSV file"
+      parameters:
+        - name: "file"
+          in: "formData"
+          description: "CSV file with user data"
+          required: true
+          type: "file"
+      responses:
+        200:
+          description: "Users uploaded successfully"
+        500:
+          description: "Server error"
+      tags:
+        - "users"         
+  /updateUser:
+    put:
+      summary: "Update user"
+      description: "Updates a user's email id"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "user"
+          in: "body"
+          description: "User object"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              oldEmail:
+                type: "string"
+              newEmail:
+                type: "string"
+      responses:
+        200:
+          description: "User updated successfully/ User not found, cannot update email"
+        500:
+          description: "Server error"
+      tags:
+        - "users"
+  /deleteUser:
+    delete:
+      summary: "Delete user"
+      description: "Deletes a user with the given email address "
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "user"
+          in: "body"
+          description: "User object"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              email:
+                type: "string"
+      responses:
+        200:
+          description: "User deleted successfully/ User not found"
+        500:
+          description: "Server error"
+      tags:
+        - "users"
