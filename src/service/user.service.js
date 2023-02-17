@@ -128,4 +128,4 @@ else{
 
 }
 
-module.exports = { userService };
+module.exports = userService ;

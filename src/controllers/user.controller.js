@@ -36,14 +36,14 @@ export default class UserController {
       const result = await userService.bulkUploadUser(
         req.file.path
       );
-
- // console.log(result)
       res.send(result.message);
     }}
+
     static async deleteUser(req,res){
       const result= await userService.deleteUser(req.body.email)
       res.send(result)
     }
+    
     static async updateUser(req,res){
       const result= await userService.updateUser(req.body.oldEmail, req.body.newEmail)
       res.send(result)

@@ -1,14 +1,9 @@
-//const { authJwt } = require("../middlewares");
-// const controller = require("../controllers/user.controller");
-//import {authJwt} from "../middleware";
 import express from "express";
 import userController from "../controllers/user.controller";
 
 
 var multer = require("multer");
 var upload = multer({ dest: "uploads/" });
-
-
 
 const router = express.Router();
 
